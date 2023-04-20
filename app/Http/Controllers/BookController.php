@@ -12,8 +12,13 @@ class BookController extends Controller
      */
     public function index()
     {
+        $books =Book::when(request('search'), function($query) {
+            $searchTerm = '%' . request('search') . '%';
+            $query->where('title', 'like', $searchTerm)->orWhere('code', 'like', $searchTerm);
+        }) ->paginate(2);
+        
         return view('books/index', [
-            'books' => Book::all(),
+            'books' => $books,
         ]);
     }
 
@@ -30,6 +35,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'code' => 'required | max:4',
+            'title' => 'required | max:100',
+        ]);
+        
         $code = $request->code;
         $title = $request->title;
         Book::create([
