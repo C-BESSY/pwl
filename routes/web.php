@@ -44,57 +44,56 @@ Route::group(['middleware' => 'pwl.auth'], function (){
     Route::get('/books/print', [BookController::class,'print'])->name('books.print');
     Route::get('/books/print/{bookId}', [BookController::class,'printDetail'])->name('books.print.detail');
     Route::get('/books/export/excel', [BookController::class,'excel'])->name('books.export.excel');
+    #CRUD books
+    Route::get('/books', [BookController::class, 'index'])->name('books.index');
+    Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+    Route::post('/books/store', [BookController::class, 'store'])->name('books.store');
+    #delete
+    Route::get('/books/{bookId}/delete-confirm', [BookController::class, 'confirmDelete'])->name('books.del.confirm');
+    #books/confirm-delete
+    Route::post('/books/delete', [BookController::class, 'delete'])->name('books.delete');
+    #update-book
+    Route::get('/books/{bookId}/update', [BookController::class, 'edit'])->name('books.edit');
+    Route::post('/books/update-confirm', [BookController::class, 'update'])->name('books.update');
+    Route::get('/books/{bookId}/delete-confirm', [BookController::class, 'confirmDelete'])->name('books.del.confirm');
+    Route::get('/books/print', [BookController::class,'print'])->name('books.print');
+    Route::get('/books/print/{bookId}', [BookController::class,'printDetail'])->name('books.print.detail');
+    Route::get('/books/export/excel', [BookController::class,'excel'])->name('books.export.excel');
+    
+    
+    #CRUD authors
+    Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
+    Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
+    Route::post('/authors/store', [AuthorController::class, 'store'])->name('authors.store');
+    
+    #update-book
+    Route::get('/authors/{authorId}/update', [AuthorController::class, 'edit'])->name('authors.edit');
+    Route::post('/authors/update-confirm', [AuthorController::class, 'update'])->name('authors.update');
+    Route::get('/authors/{authorId}/delete-confirm', [AuthorController::class, 'confirmDelete'])->name('authors.del.confirm');
+    
+    #delete
+    Route::get('/authors/{authorId}/delete-confirm', [AuthorController::class, 'confirmDelete'])->name('authors.del.confirm');
+    
+    #authors/3/confirm-delete
+    Route::post('/authors/delete', [AuthorController::class, 'delete'])->name('authors.delete');
+    
+    
+    #CRUD publishers
+    Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers.index');
+    Route::get('/publishers/create', [PublisherController::class, 'create'])->name('publishers.create');
+    Route::post('/publishers/store', [PublisherController::class, 'store'])->name('publishers.store');
+    
+    #update-book
+    Route::get('/publishers/{publisherId}/update', [PublisherController::class, 'edit'])->name('publishers.edit');
+    Route::post('/publishers/update-confirm', [PublisherController::class, 'update'])->name('publishers.update');
+    Route::get('/publishers/{publisherId}/delete-confirm', [PublisherController::class, 'confirmDelete'])->name('publishers.del.confirm');
+    
+    #delete
+    Route::get('/publishers/{publisherId}/delete-confirm', [PublisherController::class, 'confirmDelete'])->name('publishers.del.confirm');
+    
+    #publishers/3/confirm-delete
+    Route::post('/publishers/delete', [PublisherController::class, 'delete'])->name('publishers.delete');
 });
-
-#CRUD books
-Route::get('/books', [BookController::class, 'index'])->name('books.index');
-Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
-Route::post('/books/store', [BookController::class, 'store'])->name('books.store');
-#delete
-Route::get('/books/{bookId}/delete-confirm', [BookController::class, 'confirmDelete'])->name('books.del.confirm');
-#books/confirm-delete
-Route::post('/books/delete', [BookController::class, 'delete'])->name('books.delete');
-#update-book
-Route::get('/books/{bookId}/update', [BookController::class, 'edit'])->name('books.edit');
-Route::post('/books/update-confirm', [BookController::class, 'update'])->name('books.update');
-Route::get('/books/{bookId}/delete-confirm', [BookController::class, 'confirmDelete'])->name('books.del.confirm');
-Route::get('/books/print', [BookController::class,'print'])->name('books.print');
-Route::get('/books/print/{bookId}', [BookController::class,'printDetail'])->name('books.print.detail');
-Route::get('/books/export/excel', [BookController::class,'excel'])->name('books.export.excel');
-
-
-#CRUD authors
-Route::get('/authors', [AuthorController::class, 'index'])->name('authors.index');
-Route::get('/authors/create', [AuthorController::class, 'create'])->name('authors.create');
-Route::post('/authors/store', [AuthorController::class, 'store'])->name('authors.store');
-
-#update-book
-Route::get('/authors/{authorId}/update', [AuthorController::class, 'edit'])->name('authors.edit');
-Route::post('/authors/update-confirm', [AuthorController::class, 'update'])->name('authors.update');
-Route::get('/authors/{authorId}/delete-confirm', [AuthorController::class, 'confirmDelete'])->name('authors.del.confirm');
-
-#delete
-Route::get('/authors/{authorId}/delete-confirm', [AuthorController::class, 'confirmDelete'])->name('authors.del.confirm');
-
-#authors/3/confirm-delete
-Route::post('/authors/delete', [AuthorController::class, 'delete'])->name('authors.delete');
-
-
-#CRUD publishers
-Route::get('/publishers', [PublisherController::class, 'index'])->name('publishers.index');
-Route::get('/publishers/create', [PublisherController::class, 'create'])->name('publishers.create');
-Route::post('/publishers/store', [PublisherController::class, 'store'])->name('publishers.store');
-
-#update-book
-Route::get('/publishers/{publisherId}/update', [PublisherController::class, 'edit'])->name('publishers.edit');
-Route::post('/publishers/update-confirm', [PublisherController::class, 'update'])->name('publishers.update');
-Route::get('/publishers/{publisherId}/delete-confirm', [PublisherController::class, 'confirmDelete'])->name('publishers.del.confirm');
-
-#delete
-Route::get('/publishers/{publisherId}/delete-confirm', [PublisherController::class, 'confirmDelete'])->name('publishers.del.confirm');
-
-#publishers/3/confirm-delete
-Route::post('/publishers/delete', [PublisherController::class, 'delete'])->name('publishers.delete');
 
 
 Route::get('/test', function () {
@@ -115,6 +114,10 @@ Route::get('/coba/view', [CobaController::class, 'cobaView']);
 Route::get('/coba/model', [CobaController::class, 'cobaModel']);
 Route::get('/coba/mvc', [CobaController::class, 'cobaMVC']);
 
+#email
+Route::get('/mail/test', function () {
+    Mail::to('xodabi7530@in2reach.com')->send(new TestMail());
+});
 
 Route::get('/coba-model', function () {
     $books = Book::with('publisher')->get();
@@ -138,13 +141,5 @@ Route::get('/coba-pub', function () {
     $book = Book::with('authors')->first();
     dd($book);
 });
-
-
-
-#email
-Route::get('/mail/test', function () {
-    Mail::to('xodabi7530@in2reach.com')->send(new TestMail());
-});
-
 
 #php artisan serve

@@ -22,26 +22,22 @@ class LoginController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        $user = User::query()->where('email',$email)->first();
-
-        #error
+        $user = User::query()->where('email', $email)->first();
+        #Error
         #1. Jika user dengan email input tidak ada
-        if($user == null){
-            return redirect()->route('login')->with('gagal', 'User Tidak Ditemukan.');
+        if ($user == null) {
+            return redirect()->route('login')->with('gagal', 'Kombinasi username dan password salah');
         }
-        
-        #2. User ada tapi password salah
-        if(password_verify($password, $user->password) == false){
-            return redirect()->route('login')->with('gagal', 'Periksa Kembali Email dan Password.');
+        #2. User ada, tapi password salah
+        if (password_verify($password, $user->password) == false) {
+            return redirect()->route('login')->with('gagal', 'Kombinasi username dan password salah');
         }
-
         #3. User tidak aktif (is_active = 0)
-        if($user->is_active == 0){
-            return redirect()->route('login')->with('gagal', 'Lakukan Aktivasi Akun Lewat Email.');
+        if ($user->is_active == 0) {
+            return redirect()->route('login')->with('gagal', 'Silahkan aktivasi akun anda lewat email');
         }
-
-        #Kondisi user ada dan password benar
-        #Buat Token
+        #Kondisi user dan password benar
+        #buat token
         $token = Uuid::uuid4()->toString();
         $user->update([
             'token' => $token
@@ -52,18 +48,21 @@ class LoginController extends Controller
         return redirect()->route('books.index');
     }
 
-    public function logout(){
+    public function logout()
+    {
         session()->forget('token');
         return redirect()->route('login');
     }
-    public function prosesRegister(Request $request){
+
+    public function prosesRegister(Request $request)
+    {
         $name = $request->name;
         $email = $request->email;
         $password = $request->password;
 
-        #1. Cek apakah Email nya Exist
-        $user = User::query()->where('email',$email)->first();
-        if($user != null){
+        #1. Cek apakah email nya exist
+        $user = User::query()->where('email', $email)->first();
+        if ($user != null) {
             return redirect()->route('login')->with('gagal', 'Email sudah terdaftar');
         }
 
@@ -74,11 +73,11 @@ class LoginController extends Controller
             'password' => password_hash($password, PASSWORD_DEFAULT)
         ]);
 
-        #3. Buat kode OTP menggunakan faker, 4 angka random
-        $otp = rand(1000,9999);
+        #3. Buat kode otp, menggunakan faker, 4 angka random
+        $otp = rand(1000, 9999);
 
-        #4. Menggunakan Carbon, kita membuat hari ini + 1 hari
-        $expired = Carbon::now()->addDays(1);
+        #4. Menggunakan Carbon kita membuat hari ini + 1 hari
+        $expired = Carbon::now()->addDay(1);
 
         #5. Simpan data ke UserVerification
         $userVerification = UserVerification::create([
@@ -98,26 +97,23 @@ class LoginController extends Controller
         #ambil parameter email dan otp
         $email = $request->email;
         $otp = $request->otp;
-
-        #1. Cek apakah emailnya ada
+        #1. Cek apakah email nya ada
         $user = User::query()->where('email', $email)->first();
-        if($user == null){
-            return redirect()->route('login')->with('gagal', 'Email tidak ditemukan');
+        if ($user == null) {
+            return redirect()->route('login')->with('gagal', 'Email Tidak Ditemukan');
         }
-
         #2. Cek apakah otp nya sama
-        $userVerification = UserVerification::query()->where('is_user', $user->id)->first();
-        if($userVerification == null){
+        $userVerification = UserVerification::query()->where('id_user', $user->id)->first();
+        if ($userVerification == null) {
             return redirect()->route('login')->with('gagal', 'Otp tidak ditemukan');
         }
-        if($userVerification->otp != $otp){
-            return redirect()->route('login')->with('gagal', 'Otp tidak cocok');
+        if ($userVerification->otp != $otp) {
+            return redirect()->route('login')->with('gagal', 'Otp tidak ditemukan');
         }
-        if($userVerification->expired < Carbon::now()){
+        if ($userVerification->expired < Carbon::now()) {
             return redirect()->route('login')->with('gagal', 'Otp sudah expired');
         }
-
-        #3. Aktivasi user dengan mengganti is_active
+        #3. Aktivasi user dengan mengganti is_active = 1
         $user->is_active = 1;
         $user->save();
         return redirect()->route('login');

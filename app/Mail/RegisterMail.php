@@ -1,29 +1,31 @@
 <?php
 
 namespace App\Mail;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterMail extends Mailable {
+class RegisterMail extends Mailable
+{
     use Queueable, SerializesModels;
 
     protected $user;
     protected $userVerification;
 
-
-    public function __construct($user, $userVerification){
+    public function __construct($user, $userVerification)
+    {
         $this->user = $user;
         $this->userVerification = $userVerification;
     }
 
-    public function build() 
+    public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRES'))
-        ->view('mail/register_mail')
-        ->with([
-            'user' => $this->user,
-            'userVerification' => $this->userVerification
-        ]);
+        return $this->from(env('MAIL_FROM_ADDRESS'))
+            ->view('mail/register_mail')
+            ->with([
+                'user' => $this->user,
+                'userVerification' => $this->userVerification
+            ]);
     }
 }
