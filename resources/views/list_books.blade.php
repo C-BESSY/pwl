@@ -13,3 +13,5 @@
     @endforeach
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">

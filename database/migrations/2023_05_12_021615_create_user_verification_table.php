@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('user_verification', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 10);
-            $table->string('title', 250);
+            $table->bigInteger('id_user');
+            $table->string('otp');
+            $table->dateTime('expired');
             $table->timestamps();
         });
     }
@@ -24,7 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('user_verification');
     }
 };
-

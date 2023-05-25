@@ -8,8 +8,8 @@
 </head>
 <body>
     <h1>Ini ada coba view</h1>
-    {{$nama}}
-    @if ($nama == 'Joko')
+    {{$name}}, {{$umur}}
+    @if ($name == 'Joko')
     Kok mirip nama Presiden
     @endif
 </body>

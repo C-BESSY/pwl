@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::dropIfExists('users');
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('code', 10);
-            $table->string('title', 250);
+            $table->string('email');
+            $table->string('password');
+            $table->string('name');
+            $table->string('token')->nullable();
+            $table->enum('role', ['superadmin','admin','user'])
+                  ->default('user');
             $table->timestamps();
         });
     }
@@ -24,7 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
+        Schema::dropIfExists('users');
     }
 };
-
