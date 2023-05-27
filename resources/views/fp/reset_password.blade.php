@@ -27,7 +27,7 @@
 
         @csrf
         <div class="input-group mb-3">
-          <input type="{{$email}}" readonly type="email" class="form-control" placeholder="Email">
+          <input value="{{$email}}" readonly type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="{{$token}}" readonly type="token" class="form-control" placeholder="Token">
+          <input value="{{$token}}" readonly type="token" class="form-control" placeholder="Token">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>

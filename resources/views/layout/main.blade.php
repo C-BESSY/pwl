@@ -163,7 +163,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="login" role="button">
                         <i class="fas fa-sign-out-alt"></i> 
                     </a>
                 </li>                
@@ -185,10 +185,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="/assets/dist/img/avatar.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="/assets/dist/img/user3-128x128.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Chassie</a>
+                        <a href="#" class="d-block">Chassie Bessy</a>
                     </div>
                 </div>
 
