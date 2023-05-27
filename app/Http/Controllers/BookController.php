@@ -114,10 +114,10 @@ class BookController extends BaseController
             }
             DB::commit();
             #untuk mengembalikan ke halaman yang dituju
-            return redirect(route('books.index'))->with('sukses', 'buku sukses di tambah');
+            return redirect(route('books.index'))->with('sukses', 'Buku Berhasil di Tambah');
         } catch (\Throwable $th) {
             DB::rollBack();
-            return redirect(route('books.index'))->with('error', 'Buku Gagal di tambah');
+            return redirect(route('books.index'))->with('error', 'Buku Gagal di Tambah');
         }
     }
 
@@ -160,7 +160,7 @@ class BookController extends BaseController
         $book->update([
             'title' => $request->title
         ]);
-        return redirect(route('books.index'))->with('sukses', 'data buku sukses di update');;
+        return redirect(route('books.index'))->with('sukses', 'Data Buku Berhasil di Update');
     }
 
     public function view()
@@ -194,7 +194,7 @@ class BookController extends BaseController
             'name' => $name,
         ]);
         #untuk mengembalikan ke halaman yang dituju
-        return redirect(route('publishers.view'))->with('sukses', 'publisher sukses di tambah');
+        return redirect(route('publishers.view'))->with('sukses', 'Publisher Berhasil di Tambah');
     }
 
     public function editPublisher($publisherId)
@@ -216,7 +216,7 @@ class BookController extends BaseController
         $publisher->update([
             'name' => $request->name
         ]);
-        return redirect(route('publishers.view'))->with('sukses', 'data publisher sukses di update');;
+        return redirect(route('publishers.view'))->with('sukses', 'Data Publisher Berhasil di Update');;
     }
 
     public function confirmDeletePublisher($publisherId)
@@ -233,7 +233,7 @@ class BookController extends BaseController
         $publisherId = $request->id;
         $publisher = Publisher::findOrFail($publisherId);
         $publisher->delete();
-        return redirect(route('publishers.view'))->with('sukses', 'data publisher sukses di hapus');
+        return redirect(route('publishers.view'))->with('sukses', 'Data Publisher Berhasil di Hapus');
     }
 
     public function viewAuthor()
@@ -267,7 +267,7 @@ class BookController extends BaseController
             'name' => $name,
         ]);
         #untuk mengembalikan ke halaman yang dituju
-        return redirect(route('authors.viewAuthor'))->with('sukses', 'author sukses di tambah');
+        return redirect(route('authors.viewAuthor'))->with('sukses', 'Author Berhasil di Tambah');
     }
 
     public function editAuthor($authorId)
@@ -289,7 +289,7 @@ class BookController extends BaseController
         $author->update([
             'name' => $request->name
         ]);
-        return redirect(route('authors.viewAuthor'))->with('sukses', 'data author sukses di update');
+        return redirect(route('authors.viewAuthor'))->with('sukses', 'Data Author Berhasil di Update');
     }
 
     public function confirmDeleteAuthor($authorId)
@@ -306,6 +306,6 @@ class BookController extends BaseController
         $authorId = $request->id;
         $author = Author::findOrFail($authorId);
         $author->delete();
-        return redirect(route('authors.viewAuthor'))->with('sukses', 'data author berhasil di hapus');
+        return redirect(route('authors.viewAuthor'))->with('sukses', 'Data Author Berhasil di Hapus');
     }
 }
