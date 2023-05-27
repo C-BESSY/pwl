@@ -39,18 +39,18 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label for="">Authors</label>
                     <select class="js-example-basic-multiple form-control @error('id_publisher') is-invalid @enderror" name="id_author[]"
                         multiple="multiple">
-                        @foreach ($authors as $p)
-                            <option {{ in_array($p->id, $authorArray) ? 'selected' : '' }} value="{{ $p->id }}">{{ $p->name }}</option>
+                        @foreach ($authors as $a)
+                            <option {{ in_array($a->id, $authorArray) ? 'selected' : '' }} value="{{ $a->id }}">{{ $a->name }}</option>
                         @endforeach
                     </select>
                     @error('id_authors')
                         <span class="invalid-feedback"> {{ $message }}</span>
                     @enderror
-                </div>
+                </div> --}}
 
                 <p>
                     Publisher : <br>
