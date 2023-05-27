@@ -20,6 +20,7 @@ class BookSeeder extends Seeder
                     'code' => "B".fake()->randomNumber(3, true),
                     'title' => "Biografi : ".fake()->name,
                     'id_publisher' => $i
+
                 ]);
             }
         }

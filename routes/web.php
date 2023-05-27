@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Mail\TestMail;
 use App\Models\Book;
 use App\Models\Publisher;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('layout.main');
+});
+
+#Route Forgot Password
+Route::group(['prefix' => 'forgot_password'], function() {
+    Route::get('/',[ResetPasswordController::class,'index'])->name('fp');
+    Route::get('/reset',[ResetPasswordController::class,'reset'])->name('fp.reset');
+    Route::get('/new-password',[ResetPasswordController::class,'newPasswordForm'])->name('fp.new.form');
+    Route::post('/new-password',[ResetPasswordController::class,'newPasswordProses'])->name('fp.new.proses');
 });
 
 #Route Register
